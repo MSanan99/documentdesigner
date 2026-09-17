@@ -46,11 +46,17 @@ def format_time(val):
     return str(val)
 
 
+def format_inr(val):
+    if val is None or pd.isna(val):
+        return "\u20b90.00"
+    return f"\u20b9{float(val):.2f}"
+
+
 generated_files = []
 
 for index, row in data.iterrows():
 
-    doc = DocxTemplate("Telecom_Bill_Template_v1.docx")
+    doc = DocxTemplate("Telecom_Bill_Template2_v1.docx")
 
     customer_id = str(row["CustomerID"]).upper()
 
@@ -132,7 +138,18 @@ for index, row in data.iterrows():
         "CallDetails": call_details,
         "MrcCharges": mrc_charges,
         "OtherCharges": other_charges,
-        "UsageCharges": usage_charges
+        "UsageCharges": usage_charges,
+        "prevbill": format_inr(row["prevbill"]),
+        "paymrcvd": format_inr(row["paymrcvd"]),
+        "curchrgs": format_inr(row["curchrgs"]),
+        "curtaxes": format_inr(row["curtaxes"]),
+        "curbill": format_inr(row["curbill"]),
+        "totdue": format_inr(row["totdue"]),
+        "contactno": row["contactno"],
+        "custemail": row["custemail"],
+        "custmsdn": row["custmsdn"]
+
+
     }
 
     doc.render(context)
