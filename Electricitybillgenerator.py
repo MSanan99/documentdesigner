@@ -25,7 +25,13 @@ for index, row in data.iterrows():
         "totalOtherCharges": row["totalOtherCharges"],
         "total_taxes": row["total_taxes"],
         "TotalAmount": row["TotalAmount"],
-        "DueDate": row["DueDate"]
+        "DueDate": row["DueDate"],
+        "M": row["M"],
+        "M1": row["M1"],
+        "M2": row["M2"],
+        "MTotAmount": row["MTotAmount"],
+        "M1TotAmount": row["M1TotAmount"],
+        "M2TotAmount": row["M2TotAmount"]
     }
 
     doc.render(context)
